@@ -5,10 +5,10 @@ const Dashboard = () => {
   return (
     <div className="max-w-7xl mx-auto ">
       <div className="lg:flex mx-auto">
-        <div className="">
+        <div className="z-50">
           <Sidebar />
         </div>
-        <div className="z-10  pt-4 px-4 lg:px-10">
+        <div className= "z-10 pt-4 px-4 lg:px-10">
           <Outlet />
         </div>
       </div>

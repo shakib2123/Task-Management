@@ -1,8 +1,15 @@
 import "./AddTask.css";
 import { useForm } from "react-hook-form";
+import useAxios from "./useAxios";
+import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContest } from "../../Provider/AuthProvider";
 const AddTask = () => {
+  const { user } = useContext(AuthContest);
+  const axios = useAxios();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -18,15 +25,30 @@ const AddTask = () => {
       date,
       description,
       priority,
+      userEmail: user?.email,
+      status: "to-do",
     };
-    console.log(taskData);
+    axios
+      .post("/tasks", taskData)
+      .then((res) => {
+        toast.success("Task added successfully!");
+        console.log(res.data);
+        reset();
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err.message);
+      });
   };
 
   return (
-    <div className="w-full flex justify-center ">
+    <div className="z-10 w-full flex justify-center ">
       <div className="form-container w-full lg:w-[600px]">
+        <h3 className="text-4xl font-bold text-gray-300 text-center">
+          Begin Your Next Task
+        </h3>
         <form className="z-50" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control">
+          <div className="form-control z-10">
             <label className="label">
               <span className="label-text">Title</span>
             </label>
@@ -42,7 +64,7 @@ const AddTask = () => {
             )}
           </div>
 
-          <div className="form-control">
+          <div className="form-control z-10">
             <label className="label">
               <span className="label-text">Deadline</span>
             </label>
@@ -56,7 +78,7 @@ const AddTask = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-          <div className="form-control">
+          <div className="form-control z-10">
             <label className="label">
               <span className="label-text">Description</span>
             </label>
@@ -71,7 +93,7 @@ const AddTask = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-          <label className="form-control w-full">
+          <label className="form-control z-10 w-full">
             <div className="label">
               <span className="label-text">priority</span>
             </div>
@@ -91,7 +113,7 @@ const AddTask = () => {
             <span className="text-red-600">This field is required</span>
           )}
 
-          <button type="submit" className="mt-5 task-btn w-full">
+          <button type="submit" className="mt-5 z-10 task-btn w-full">
             <span></span>
             <span></span>
             <span></span>

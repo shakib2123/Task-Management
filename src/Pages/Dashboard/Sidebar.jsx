@@ -23,7 +23,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="bg-gray-800 z-40 text-white flex justify-between lg:hidden">
+      <div className="bg-gray-800 z-50 text-white flex justify-between lg:hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             <h2 className="text-3xl md:text-4xl font-bold uppercase category-text">
@@ -41,14 +41,14 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
-        className={`z-50 min-h-screen absolute lg:static flex flex-col justify-between overflow-x-hidden bg-blue-950 w-80 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
+        className={`z-[1000] min-h-screen absolute lg:static flex flex-col justify-between overflow-x-hidden bg-blue-950 w-80 space-y-6 px-2 py-4  inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  lg:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
-          <h2 className="text-3xl pl-5 md:text-4xl font-bold uppercase category-text">
+          <h2 className="text-3xl pb-4 pl-5 md:text-4xl font-bold uppercase category-text">
             TaskMaster
-          </h2>
+          </h2> <hr />
           <NavLink
             to="/dashboard/addTask"
             className={({ isActive }) =>
