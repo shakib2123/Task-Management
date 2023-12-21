@@ -1,6 +1,9 @@
 import { MdOutlineMenu } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
+import { useContext } from "react";
+import { AuthContest } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const navLinks = (
   <>
@@ -46,10 +49,30 @@ const navLinks = (
         About
       </NavLink>
     </li>
+    <li>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive, isPending }) =>
+          isActive
+            ? "bg-gray-900 route-btn text-gray-200  hover:bg-gray-800"
+            : isPending
+            ? "pending"
+            : ""
+        }
+      >
+        Dashboard
+      </NavLink>
+    </li>
   </>
 );
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContest);
+  const handleLogout = () =>
+  {
+    logout().then(()=>toast.success('Logout successful!')).catch((err)=>toast.error(err.message))
+  }
+
   return (
     <div className="bg-blue-950 shadow-md shadow-blue-800">
       <nav className="navbar max-w-7xl mx-auto">
@@ -65,49 +88,23 @@ const Navbar = () => {
               {navLinks}
             </ul>
           </div>
-          <img src="/logo.jpg" alt="logo" className="w-10 md:w-16 rounded-2xl" />
+          <img
+            src="/logo.jpg"
+            alt="logo"
+            className="w-10 md:w-16 rounded-2xl"
+          />
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-5">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2   menu menu-sm dropdown-content rounded-box w-52 space-y-4 bg-blue-950 shadow-lg shadow-blue-700"
-            >
-              <li>
-                <span className="name-text text-md font-bold">Shakib</span>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "bg-gray-900 route-btn text-gray-200  hover:bg-gray-800"
-                      : "bg-purple-900 border border-purple-700"
-                  }
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-              <li>
-                <button className="logout-btn">Logout</button>
-              </li>
-            </ul>
-          </div>
+          {user ? (
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          ) : (
+            <Link to="/login">
+              <button className="logout-btn">Login</button>
+            </Link>
+          )}
         </div>
       </nav>
     </div>
