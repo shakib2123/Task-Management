@@ -51,7 +51,7 @@ const navLinks = (
 
 const Navbar = () => {
   return (
-    <div className="">
+    <div className="bg-blue-950 shadow-md shadow-blue-800">
       <nav className="navbar max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -60,7 +60,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-md  shadow-purple-600 bg-purple-950 rounded-box w-52 space-y-5"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-md  shadow-blue-600 bg-blue-950 rounded-box w-52 space-y-5"
             >
               {navLinks}
             </ul>
@@ -86,7 +86,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="mt-3 z-[1] p-2   menu menu-sm dropdown-content rounded-box w-52 space-y-4 bg-purple-950 shadow-lg shadow-purple-700"
+              className="mt-3 z-[1] p-2   menu menu-sm dropdown-content rounded-box w-52 space-y-4 bg-blue-950 shadow-lg shadow-blue-700"
             >
               <li>
                 <span className="name-text text-md font-bold">Shakib</span>

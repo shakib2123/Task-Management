@@ -167,13 +167,13 @@
   transition: all 0.3s;
   background-image: linear-gradient(
     to right,
-    #488cfb,
-    #29dbbc,
-    #ddf505,
-    #ff9f0e,
-    #e440bb,
-    #655adc,
-    #488cfb
+    #7bacfc,
+    #78fae4,
+    #e7ff10,
+    #fca728,
+    #ff56d5,
+    #7a6ff5,
+    #67a1ff
   );
   -webkit-background-clip: text;
   color: transparent;
