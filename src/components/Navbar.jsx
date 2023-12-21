@@ -51,7 +51,7 @@ const navLinks = (
     </li>
     <li>
       <NavLink
-        to="/dashboard"
+        to="/dashboard/addTask"
         className={({ isActive, isPending }) =>
           isActive
             ? "bg-gray-900 route-btn text-gray-200  hover:bg-gray-800"
@@ -68,10 +68,11 @@ const navLinks = (
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContest);
-  const handleLogout = () =>
-  {
-    logout().then(()=>toast.success('Logout successful!')).catch((err)=>toast.error(err.message))
-  }
+  const handleLogout = () => {
+    logout()
+      .then(() => toast.success("Logout successful!"))
+      .catch((err) => toast.error(err.message));
+  };
 
   return (
     <div className="bg-blue-950 shadow-md shadow-blue-800">
@@ -88,18 +89,18 @@ const Navbar = () => {
               {navLinks}
             </ul>
           </div>
-          <img
-            src="/logo.jpg"
-            alt="logo"
-            className="w-10 md:w-16 rounded-2xl"
-          />
+          <h2 className="text-3xl md:text-4xl font-bold uppercase category-text">
+            TaskMaster
+          </h2>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-5">{navLinks}</ul>
         </div>
         <div className="navbar-end">
           {user ? (
-            <button onClick={handleLogout} className="logout-btn">Logout</button>
+            <button onClick={handleLogout} className="logout-btn">
+              Logout
+            </button>
           ) : (
             <Link to="/login">
               <button className="logout-btn">Login</button>

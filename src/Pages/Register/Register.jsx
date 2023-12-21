@@ -7,7 +7,7 @@ import { AuthContest } from "../../Provider/AuthProvider";
 import "./Register.css";
 import axios from "axios";
 const Register = () => {
-  const { login, profileUpdate, gitHubLogin, googleLogin } =
+  const { createUser, profileUpdate, gitHubLogin, googleLogin } =
     useContext(AuthContest);
   const navigate = useNavigate();
 
@@ -27,10 +27,10 @@ const Register = () => {
         import.meta.env.VITE_IMGBB_API_KEY
       }`,
       formData
-      );
-      console.log(data.data?.display_url);
+    );
+    console.log(data.data?.display_url);
 
-    login(email, password)
+    createUser(email, password)
       .then((res) => {
         console.log(res);
         profileUpdate(name, data.data?.display_url)

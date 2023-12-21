@@ -4,6 +4,8 @@ import Home from "../Pages/Home";
 import ErrorPage from "../Pages/ErrorPage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import AddTask from "../Pages/Dashboard/AddTask";
 const Route = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +23,16 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "addTask",
+        element: <AddTask />,
       },
     ],
   },
