@@ -4,7 +4,7 @@ import { AiOutlineBars } from "react-icons/ai";
 import { MdAddModerator, MdWorkHistory } from "react-icons/md";
 import toast from "react-hot-toast";
 import { AuthContest } from "../../Provider/AuthProvider";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaUser } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
@@ -48,7 +48,8 @@ const Sidebar = () => {
         <div>
           <h2 className="text-3xl pb-4 pl-5 md:text-4xl font-bold uppercase category-text">
             TaskMaster
-          </h2> <hr />
+          </h2>{" "}
+          <hr />
           <NavLink
             to="/dashboard/addTask"
             className={({ isActive }) =>
@@ -95,6 +96,17 @@ const Sidebar = () => {
               Home
             </button>
           </Link>
+          <NavLink
+            to="/dashboard/profile"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-blue-700 flex gap-4 font-medium w-full items-center px-4 py-2 mt-5 text-gray-200 hover:bg-blue-700 rounded-2xl  hover:text-gray-100 transition-colors duration-300 transform"
+                : "flex gap-4 font-medium w-full items-center px-4 py-2 mt-5 text-gray-200 hover:bg-blue-700 rounded-2xl  hover:text-gray-100 transition-colors duration-300 transform"
+            }
+          >
+            <FaUser className="w-5 h-5" />
+            Profile
+          </NavLink>
 
           <button
             onClick={handleLogout}

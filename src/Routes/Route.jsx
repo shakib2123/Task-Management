@@ -9,6 +9,7 @@ import AddTask from "../Pages/Dashboard/AddTask";
 import PersonalTask from "../Pages/Dashboard/PersonalTask";
 import EditTask from "../Pages/EditTask";
 import PrivateRoute from "../Private/PrivateRoute";
+import Profile from "../Pages/Dashboard/Profile";
 const Route = createBrowserRouter([
   {
     path: "/",
@@ -62,6 +63,14 @@ const Route = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/tasks/${params.id}`),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
     ],
   },
