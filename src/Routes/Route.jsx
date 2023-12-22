@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import AddTask from "../Pages/Dashboard/AddTask";
 import PersonalTask from "../Pages/Dashboard/PersonalTask";
+import EditTask from "../Pages/EditTask";
 const Route = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,12 @@ const Route = createBrowserRouter([
       {
         path: "personalTasks",
         element: <PersonalTask />,
+      },
+      {
+        path: "editTask/:id",
+        element: <EditTask />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/tasks/${params.id}`),
       },
     ],
   },

@@ -80,9 +80,11 @@ const PersonalTask = () => {
                     >
                       <FaTrash />
                     </button>
-                    <button className="text-lg text-amber-700">
-                      <FaEdit />
-                    </button>
+                    <Link to={`/dashboard/editTask/${toDo._id}`}>
+                      <button className="text-lg text-amber-700">
+                        <FaEdit />
+                      </button>
+                    </Link>
                   </div>
                   <h2 className="text-lg font-medium">{toDo?.title}</h2>
                   <h2 className="text-lg font-medium text-yellow-700">
