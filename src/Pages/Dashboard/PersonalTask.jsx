@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAxios from "./useAxios";
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContest } from "../../Provider/AuthProvider";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { BiSolidTimeFive } from "react-icons/bi";
 import Swal from "sweetalert2";
+import { useDrop } from "react-dnd";
+import ToDoItem from "./ToDo/ToDoItem";
 const PersonalTask = () => {
   const { user, loader } = useContext(AuthContest);
   const axios = useAxios();
@@ -25,7 +27,6 @@ const PersonalTask = () => {
   const toDos = tasks.filter((task) => task.status === "to-do");
   const onGoing = tasks.filter((task) => task.status === "ongoing");
   const Completed = tasks.filter((task) => task.status === "completed");
-  console.log(toDos);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -50,6 +51,24 @@ const PersonalTask = () => {
       }
     });
   };
+  const [task, setTask] = useState([]);
+  const [{ isOver }, addToOngoingRef] = useDrop({
+    accept: "toDo",
+    collect: (monitor) => ({ isOver: !!monitor.isOver() }),
+  });
+  const [{ isOver: isTodoOver }, removeFromOngoingRef] = useDrop({
+    accept: "ongoing",
+    collect: (monitor) => ({ isOver: !!monitor.isOver() }),
+  });
+
+  const moveToDoToOngoing = (item) => {
+    console.log(item._id);
+    setTask(item);
+  };
+  const removeToDoFromOngoing = (item) => {
+    console.log(item._id);
+  };
+
   return (
     <div>
       <div className="bg-blue-950 p-4 rounded-2xl flex justify-between items-center w-full lg:w-[820px]">
@@ -64,49 +83,44 @@ const PersonalTask = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-8">
         {/* To Do */}
-        <div className="bg-teal-600 rounded-2xl border border-gray-400 p-4">
+        <div
+          className="bg-teal-600 rounded-2xl border border-gray-400 p-4"
+          ref={removeFromOngoingRef}
+        >
           <p className="text-white text-xl font-bold flex gap-2 items-center">
             <MdCheckBoxOutlineBlank /> To Do
           </p>
           <hr />
-          {toDos.map((toDo) => (
-            <div key={toDo._id}>
-              <div className="rounded-xl my-4 bg-secondary text-primary-content group">
-                <div className="card-body">
-                  <div className="transition-transform  duration-1000 card-actions  flex flex-row justify-end gap-4">
-                    <button
-                      onClick={() => handleDelete(toDo._id)}
-                      className="text-lg text-red-700"
-                    >
-                      <FaTrash />
-                    </button>
-                    <Link to={`/dashboard/editTask/${toDo._id}`}>
-                      <button className="text-lg text-amber-700">
-                        <FaEdit />
-                      </button>
-                    </Link>
-                  </div>
-                  <h2 className="text-lg font-medium">{toDo?.title}</h2>
-                  <h2 className="text-lg font-medium text-yellow-700">
-                    Date: {toDo?.date}
-                  </h2>
-                  <p className="text-lg text-gray-700 font-bold">
-                    Priority: {toDo?.priority}
-                  </p>
-                  <p>{toDo?.description}</p>
-                </div>
-              </div>
-            </div>
+          {toDos.map((toDo, i) => (
+            <ToDoItem
+              key={toDo._id}
+              toDo={toDo}
+              refetch={refetch}
+              type="toDo"
+              index={i}
+              onDropToDo={moveToDoToOngoing}
+            />
           ))}
         </div>
         {/* Ongoing  */}
-        <div className="bg-pink-600 rounded-2xl border border-gray-400 p-4">
+        <div
+          className="bg-pink-600 rounded-2xl border border-gray-400 p-4 "
+          ref={addToOngoingRef}
+        >
           <p className="text-white text-xl font-bold flex gap-2 items-center">
             <BiSolidTimeFive /> ongoing
           </p>
           <hr />
-          {onGoing.map((going) => (
-            <div key={going._id}>
+          {onGoing.map((going, i) => (
+            // <ToDoItem
+            //   key={going._id}
+            //   toDo={going}
+            //   refetch={refetch}
+            //   type="ongoing"
+            //   index={i}
+            //   onDropToDo={removeToDoFromOngoing}
+            // />
+            <div key={going._id}  onDrag={'hello'}>
               <div className="rounded-xl my-4 bg-secondary text-primary-content group">
                 <div className="card-body">
                   <div className="transition-transform  duration-1000 card-actions  flex flex-row justify-end gap-4">

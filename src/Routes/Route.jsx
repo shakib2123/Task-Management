@@ -10,6 +10,7 @@ import PersonalTask from "../Pages/Dashboard/PersonalTask";
 import EditTask from "../Pages/EditTask";
 import PrivateRoute from "../Private/PrivateRoute";
 import Profile from "../Pages/Dashboard/Profile";
+import About from "../Pages/About/About";
 const Route = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,10 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },
