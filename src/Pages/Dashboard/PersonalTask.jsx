@@ -8,7 +8,7 @@ import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { BiSolidTimeFive } from "react-icons/bi";
 import Swal from "sweetalert2";
 const PersonalTask = () => {
-  const { loader } = useContext(AuthContest);
+  const { user, loader } = useContext(AuthContest);
   const axios = useAxios();
   const {
     data: tasks = [],
@@ -18,7 +18,7 @@ const PersonalTask = () => {
     enabled: !loader,
     queryKey: ["allTasks"],
     queryFn: async () => {
-      const res = await axios.get("/tasks");
+      const res = await axios.get(`/tasks/${user?.email}`);
       return res.data;
     },
   });
@@ -90,6 +90,9 @@ const PersonalTask = () => {
                   <h2 className="text-lg font-medium text-yellow-700">
                     Date: {toDo?.date}
                   </h2>
+                  <p className="text-lg text-gray-700 font-bold">
+                    Priority: {toDo?.priority}
+                  </p>
                   <p>{toDo?.description}</p>
                 </div>
               </div>
@@ -113,14 +116,19 @@ const PersonalTask = () => {
                     >
                       <FaTrash />
                     </button>
-                    <button className="text-lg text-amber-700">
-                      <FaEdit />
-                    </button>
+                    <Link to={`/dashboard/editTask/${going._id}`}>
+                      <button className="text-lg text-amber-700">
+                        <FaEdit />
+                      </button>
+                    </Link>
                   </div>
                   <h2 className="text-lg font-medium">{going?.title}</h2>
                   <h2 className="text-lg font-medium text-yellow-700">
                     Date: {going?.date}
                   </h2>
+                  <p className="text-lg text-gray-700 font-bold">
+                    Priority: {going?.priority}
+                  </p>
                   <p>{going?.description}</p>
                 </div>
               </div>
@@ -144,14 +152,19 @@ const PersonalTask = () => {
                     >
                       <FaTrash />
                     </button>
-                    <button className="text-lg text-amber-700">
-                      <FaEdit />
-                    </button>
+                    <Link to={`/dashboard/editTask/${complete._id}`}>
+                      <button className="text-lg text-amber-700">
+                        <FaEdit />
+                      </button>
+                    </Link>
                   </div>
                   <h2 className="text-lg font-medium">{complete?.title}</h2>
                   <h2 className="text-lg font-medium text-yellow-700">
                     Date: {complete?.date}
                   </h2>
+                  <p className="text-lg text-gray-700 font-bold">
+                    Priority: {complete?.priority}
+                  </p>
                   <p>{complete?.description}</p>
                 </div>
               </div>

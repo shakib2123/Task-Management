@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { FaArrowRight, FaGithub, FaGoogle } from "react-icons/fa";
 import { IoShieldCheckmark } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContest } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 const Login = () => {
   const { login, gitHubLogin, googleLogin } = useContext(AuthContest);
+   const location = useLocation();
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,7 +17,12 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         toast.success("Login Successful!");
-        navigate("/");
+       navigate(
+         location?.state?.from?.pathname
+           ? location?.state?.from?.pathname
+           : "/",
+         { replace: true }
+       );
       })
       .catch((err) => {
         console.log(err);
@@ -29,7 +35,12 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         toast.success("Login Successful!");
-        navigate("/");
+       navigate(
+         location?.state?.from?.pathname
+           ? location?.state?.from?.pathname
+           : "/",
+         { replace: true }
+       );
       })
       .catch((err) => {
         console.log(err);

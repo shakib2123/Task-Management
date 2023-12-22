@@ -8,6 +8,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import AddTask from "../Pages/Dashboard/AddTask";
 import PersonalTask from "../Pages/Dashboard/PersonalTask";
 import EditTask from "../Pages/EditTask";
+import PrivateRoute from "../Private/PrivateRoute";
 const Route = createBrowserRouter([
   {
     path: "/",
@@ -30,19 +31,35 @@ const Route = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "addTask",
-        element: <AddTask />,
+        element: (
+          <PrivateRoute>
+            <AddTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "personalTasks",
-        element: <PersonalTask />,
+        element: (
+          <PrivateRoute>
+            <PersonalTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "editTask/:id",
-        element: <EditTask />,
+        element: (
+          <PrivateRoute>
+            <EditTask />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/tasks/${params.id}`),
       },

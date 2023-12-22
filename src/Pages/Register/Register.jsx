@@ -2,7 +2,7 @@ import { useContext } from "react";
 import toast from "react-hot-toast";
 import { FaArrowRight, FaGithub, FaGoogle } from "react-icons/fa";
 import { IoShieldCheckmark } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContest } from "../../Provider/AuthProvider";
 import "./Register.css";
 import axios from "axios";
@@ -10,6 +10,7 @@ const Register = () => {
   const { createUser, profileUpdate, gitHubLogin, googleLogin } =
     useContext(AuthContest);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -37,7 +38,12 @@ const Register = () => {
           .then((res) => {
             console.log(res);
             toast.success("Sign Up Successful!");
-            navigate("/");
+            navigate(
+              location?.state?.from?.pathname
+                ? location?.state?.from?.pathname
+                : "/",
+              { replace: true }
+            );
           })
           .catch((err) => toast.error(err.message));
       })
@@ -52,7 +58,12 @@ const Register = () => {
       .then((res) => {
         console.log(res);
         toast.success("Sign Up Successful!");
-        navigate("/");
+        navigate(
+          location?.state?.from?.pathname
+            ? location?.state?.from?.pathname
+            : "/",
+          { replace: true }
+        );
       })
       .catch((err) => {
         console.log(err);
