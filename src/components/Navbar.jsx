@@ -21,20 +21,7 @@ const navLinks = (
         Home
       </NavLink>
     </li>
-    <li>
-      <NavLink
-        to="/archived"
-        className={({ isActive, isPending }) =>
-          isActive
-            ? "bg-gray-900 route-btn text-gray-200  hover:bg-gray-800"
-            : isPending
-            ? "pending"
-            : ""
-        }
-      >
-        Archived
-      </NavLink>
-    </li>
+
     <li>
       <NavLink
         to="/about"

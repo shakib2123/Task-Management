@@ -11,6 +11,8 @@ const Banner = () => {
       }}
       className="bg-cover bg-center"
     >
+      {" "}
+      <div className="hero-overlay bg-opacity-90 h-full w-full"></div>
       <div className="max-w-7xl mx-auto py-8 flex flex-col-reverse md:flex-row items-center justify-between gap-8 px-3">
         <div className="flex-1">
           <h1 className="text-4xl text-gray-100 font-bold lg:text-7xl ">
