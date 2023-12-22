@@ -2,8 +2,8 @@ import Swal from "sweetalert2";
 import useAxios from "../useAxios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useDrag } from "react-dnd";
-const ToDoItem = ({ toDo: item, refetch, type, index, onDropToDo }) => {
+
+const ToDoItem = ({ toDo: item, refetch }) => {
   const axios = useAxios();
 
   const handleDelete = (id) => {
@@ -30,27 +30,8 @@ const ToDoItem = ({ toDo: item, refetch, type, index, onDropToDo }) => {
     });
   };
 
-  const [{ isDraggble }, dragRef] = useDrag({
-    type: type,
-    item: () => ({ ...item, index }),
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult();
-
-      if (dropResult && item) {
-        onDropToDo(item);
-      }
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-
   return (
-    <div
-      className="rounded-xl my-4 bg-secondary text-primary-content group"
-      ref={dragRef}
-     
-    >
+    <div className="rounded-xl my-4 bg-secondary text-primary-content group">
       <div className="card-body">
         <div className="transition-transform  duration-1000 card-actions  flex flex-row justify-end gap-4">
           <button

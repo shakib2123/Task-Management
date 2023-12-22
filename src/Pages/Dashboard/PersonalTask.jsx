@@ -51,23 +51,6 @@ const PersonalTask = () => {
       }
     });
   };
-  const [task, setTask] = useState([]);
-  const [{ isOver }, addToOngoingRef] = useDrop({
-    accept: "toDo",
-    collect: (monitor) => ({ isOver: !!monitor.isOver() }),
-  });
-  const [{ isOver: isTodoOver }, removeFromOngoingRef] = useDrop({
-    accept: "ongoing",
-    collect: (monitor) => ({ isOver: !!monitor.isOver() }),
-  });
-
-  const moveToDoToOngoing = (item) => {
-    console.log(item._id);
-    setTask(item);
-  };
-  const removeToDoFromOngoing = (item) => {
-    console.log(item._id);
-  };
 
   return (
     <div>
@@ -83,44 +66,23 @@ const PersonalTask = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 my-8">
         {/* To Do */}
-        <div
-          className="bg-teal-600 rounded-2xl border border-gray-400 p-4"
-          ref={removeFromOngoingRef}
-        >
+        <div className="bg-teal-600 rounded-2xl border border-gray-400 p-4">
           <p className="text-white text-xl font-bold flex gap-2 items-center">
             <MdCheckBoxOutlineBlank /> To Do
           </p>
           <hr />
-          {toDos.map((toDo, i) => (
-            <ToDoItem
-              key={toDo._id}
-              toDo={toDo}
-              refetch={refetch}
-              type="toDo"
-              index={i}
-              onDropToDo={moveToDoToOngoing}
-            />
+          {toDos.map((toDo) => (
+            <ToDoItem key={toDo._id} toDo={toDo} refetch={refetch} />
           ))}
         </div>
         {/* Ongoing  */}
-        <div
-          className="bg-pink-600 rounded-2xl border border-gray-400 p-4 "
-          ref={addToOngoingRef}
-        >
+        <div className="bg-pink-600 rounded-2xl border border-gray-400 p-4 ">
           <p className="text-white text-xl font-bold flex gap-2 items-center">
             <BiSolidTimeFive /> ongoing
           </p>
           <hr />
-          {onGoing.map((going, i) => (
-            // <ToDoItem
-            //   key={going._id}
-            //   toDo={going}
-            //   refetch={refetch}
-            //   type="ongoing"
-            //   index={i}
-            //   onDropToDo={removeToDoFromOngoing}
-            // />
-            <div key={going._id}  onDrag={'hello'}>
+          {onGoing.map((going) => (
+            <div key={going._id}>
               <div className="rounded-xl my-4 bg-secondary text-primary-content group">
                 <div className="card-body">
                   <div className="transition-transform  duration-1000 card-actions  flex flex-row justify-end gap-4">

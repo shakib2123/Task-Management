@@ -70,7 +70,7 @@ const Sidebar = () => {
             }
           >
             <MdWorkHistory className="w-5 h-5" />
-            Personal Task
+            My workspace
           </NavLink>
         </div>
         <div>

@@ -2,12 +2,11 @@ import toast from "react-hot-toast";
 import useAxios from "./Dashboard/useAxios";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
-import { data } from "autoprefixer";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 
 const EditTask = () => {
   const axios = useAxios();
   const loadedTask = useLoaderData();
+
   const {
     register,
     reset,
@@ -16,20 +15,20 @@ const EditTask = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     const title = data.title;
     const date = data.date;
     const description = data.description;
     const priority = data.priority;
+    const status = data.status;
     const taskData = {
       title,
       date,
       description,
       priority,
+      status,
     };
-      axios.put(`/tasks/${loadedTask._id}`, taskData).then((res) =>
-      {
-        console.log(res.data)
+    axios.put(`/tasks/${loadedTask._id}`, taskData).then((res) => {
+      console.log(res.data);
       if (res.data?.modifiedCount > 0) {
         toast.success("Updated successfully!");
       }
@@ -107,6 +106,24 @@ const EditTask = () => {
             </select>
           </label>
           {errors.priority && (
+            <span className="text-red-600">This field is required</span>
+          )}
+          <label className="form-control z-10 w-full">
+            <div className="label">
+              <span className="label-text">Status</span>
+            </div>
+            <select
+              {...register("status", { required: true })}
+              className="select select-bordered"
+              defaultValue={loadedTask?.status}
+            >
+              <option disabled>Pick one</option>
+              <option value="toDo">To Do</option>
+              <option value="ongoing">Ongoing</option>
+              <option value="completed">Completed</option>
+            </select>
+          </label>
+          {errors.status && (
             <span className="text-red-600">This field is required</span>
           )}
 

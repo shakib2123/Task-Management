@@ -93,7 +93,7 @@ const About = () => {
                 <div className="text-lg font-medium text-stone-300 cursor-pointer hover:text-stone-400">
                   John Doe
                 </div>
-                <div className="italic text-gray-400">CEO, Tailblocks</div>
+                <div className="italic text-gray-400">CEO, TaskMaster</div>
               </div>
               <div className="flex-col px-6 py-2">
                 <div className="md:h-40 h-28 w-28 md:w-40 rounded-full overflow-hidden bg-gray-200">

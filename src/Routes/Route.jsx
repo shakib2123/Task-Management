@@ -67,7 +67,9 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/tasks/${params.id}`),
+          fetch(
+            `https://task-managment-server-liart.vercel.app/tasks/${params.id}`
+          ),
       },
       {
         path: "profile",

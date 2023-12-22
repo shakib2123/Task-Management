@@ -19,7 +19,15 @@ const Register = () => {
     const password = form.password.value;
     const name = form.name.value;
     const photo = form.photo.files[0];
-    console.log(name, email, password, photo);
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\]).{8,}$/.test(
+        password
+      )
+    ) {
+      return toast.error(
+        "Password should be at least 6 latter, digit and special character."
+      );
+    }
 
     const formData = new FormData();
     formData.append("image", photo);
